@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P:regular"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic"
+      rel="stylesheet"
+    />
     <title>Document</title>
   </head>
   <body>
@@ -17,21 +25,21 @@
       <!-- when the button is clicked this div displays -->
       <div class="display-game" id="display-game">
         <h3 id="question">Lorem ipsum dolor sit amet.</h3>
-        <!-- this image could be included depending on the API content -->
-        <img src="https://picsum.photos/400/300" alt="This is a placeholder" />
         <!-- the options will be created with Javascript -->
-        <input type="radio" name="options-answer1" id="options-answer1" />
-        <label for="options-answer1">Option 1</label>
-        <input type="radio" name="options-answer2" id="options-answer2" />
-        <label for="options-answer2">Option 2</label>
-        <input type="radio" name="options-answer2" id="options-answer3" />
-        <label for="options-answer3">Option 3</label>
-        <input type="radio" name="options-answer4" id="options-answer4" />
-        <label for="options-answer4">Option 4</label>
+        <div class="options" id="options">
+          <input type="radio" name="options-answer" id="options-answer1" />
+          <label for="options-answer">Option 1</label>
+          <input type="radio" name="options-answer" id="options-answer2" />
+          <label for="options-answer">Option 2</label>
+          <input type="radio" name="options-answer" id="options-answer3" />
+          <label for="options-answer">Option 3</label>
+          <input type="radio" name="options-answer" id="options-answer4" />
+          <label for="options-answer">Option 4</label>
+        </div>
         <!-- This is going to be the timer -->
         <p class="timer">Time Left: 10s</p>
         <!-- This button displays when the game ends -->
-        <button type="button" class="play-again-button">Play Again</button>
+        <button type="button" id="play-again-button">Play Again</button>
       </div>
     </main>
     <footer>
