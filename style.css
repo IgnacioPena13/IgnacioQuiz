@@ -49,7 +49,7 @@ main {
 #button-start {
   width: 20%;
   height: 10%;
-  font-size: 20px;
+  font-size: fit-content 20px;
   font-family: "Press Start 2P";
   align-self: center;
   border: solid 2px var(--border);
@@ -88,13 +88,12 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: var(--border);
+  overflow: scroll;
 }
 
-#option1,
-#option2,
-#option3,
-#option4 {
-  margin: 5px;
+.option {
+  margin: 10px;
   background-color: grey;
   width: 90%;
   height: 30px;
@@ -106,19 +105,7 @@ main {
   align-items: center;
 }
 
-#option1:hover {
-  background-color: var(--contrast);
-  transform: scale(1.2);
-}
-#option2:hover {
-  background-color: var(--contrast);
-  transform: scale(1.2);
-}
-#option3:hover {
-  background-color: var(--contrast);
-  transform: scale(1.2);
-}
-#option4:hover {
+.option:hover {
   background-color: var(--contrast);
   transform: scale(1.2);
 }
