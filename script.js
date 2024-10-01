@@ -52,36 +52,43 @@ async function displayGame(data) {
   form.style.display = "none";
 
   //create the questions array and mapping the answers to enlist them in an empty array
-  const questionsArray = data.results;
-  //destructuring the questions array to separate each question
-  const [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10] = questionsArray;
-  //getting the question and displaying it
-  for (let i = 0; i < questionsArray.length; i++) {
-    let title = questionsArray[i].question;
-    questionTitles.push(title);
-    gameQuestion.innerHTML = title;
-  }
-  const [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10] = questionTitles;
-  //push every answer to the array
-  questionsArray.map((item) => {
-    const { correct_answer, incorrect_answers } = item;
-    allAnswers.push(correct_answer);
-    for (let i = 0; i < incorrect_answers.length; i++) {
-      allAnswers.push(incorrect_answers[i]);
-    }
-  });
-  const [ans1, ans2, ans3, ans4] = allAnswers;
-  //at this point there are 2 different destructured arrays : questionsArray, allAnswers, questionTitles
+  const itemArray = data.results;
+  console.log(itemArray);
 
-  console.log(questionsArray);
-  console.log(questionTitles);
-  createOption(allAnswers);
+  displayQuestion(itemArray);
+
+  //destructuring the questions array to separate each question
+  // const [q1, q2, q3, q4, q5, q6, q7, q8, q9, q10] = questionsArray;
+  //getting the question and displaying it
+  // questionsArray.forEach((item, i) => {
+
+  // const [t1, t2, t3, t4, t5, t6, t7, t8, t9, t10] = questionTitles;
+  //push every answer to the array
+  // questionsArray.map((item) => {
+  //   const { correct_answer, incorrect_answers } = item;
+  //   allAnswers.push(correct_answer);
+  //   for (let i = 0; i < incorrect_answers.length; i++) {
+  //     allAnswers.push(incorrect_answers[i]);
+  //   }
+  // });
+  // const [ans1, ans2, ans3, ans4] = allAnswers;
+  //at this point there are 3 different destructured arrays : questionsArray, allAnswers, questionTitles
+
+  // console.log(questionsArray);
+  // console.log(questionTitles);
+  // createOption(allAnswers);
 }
 
-function displayQuestion(titleArray, answerArray) {
-  //try using a switch statement and displaying all the cases.
-  let questionNumber = 0;
-  questionsArray.forEach((element, i) => {});
+function displayQuestion(questions) {
+  //looping through the array itemArray and stopping to check the condition
+  for (let i = 0; i < questions.length; i++) {
+    // let question = questions[i].question;
+    // console.log(question);
+    if (i === 1) {
+      console.log(questions[i].correct_answer);
+      break; //do not delete this unless you change the condition(infinite loop).
+    }
+  }
 }
 function createOption(answerArray) {
   //create an option for every answer of the question using the previous array
