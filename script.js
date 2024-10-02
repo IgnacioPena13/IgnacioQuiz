@@ -73,10 +73,12 @@ function displayQuestion() {
 function displayAnswers() {
   const questionArray = allQuestions[index];
   const answers = questionArray.answers;
+  console.log(answers);
+
   answers.forEach((answer, i) => {
-    // const questionsdiv = document.getElementById("options");
     const wrapper = document.createElement("div");
     wrapper.classList.add("option");
+    wrapper.id = `wrapper${i}`;
     const inputLabel = document.createElement("label");
     const inputOption = document.createElement("input");
     inputOption.style.width = "fit-content";
@@ -87,8 +89,8 @@ function displayAnswers() {
     inputOption.name = "option-input";
     inputLabel.htmlFor = inputOption.id;
     inputLabel.innerHTML = answer;
-    //appending child elements to display them
 
+    //appending child elements to display them
     options.appendChild(wrapper);
     wrapper.appendChild(inputOption);
     wrapper.appendChild(inputLabel);
@@ -103,18 +105,19 @@ function displayAnswers() {
         btnProceed.type = "submit";
         btnProceed.id = "button-proceed";
         btnProceed.innerHTML = "Proceed";
-        options.appendChild(btnProceed);
       }
-      //making disappear the question and the options
-      //to jump into the next question
+      options.appendChild(btnProceed);
+
+      //jumping into the next question
       options.addEventListener("submit", (e) => {
         e.preventDefault();
         const userInput = inputOption.value;
         userAnswers.push(userInput);
-        game.removeChild(options);
+        options.remove(wrapper);
         gameQuestion.innerHTML = "";
         index++;
-        console.log(index);
+        displayQuestion();
+        options.add(wrapper);
       });
     });
   });
