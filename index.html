@@ -20,7 +20,7 @@
     </header>
 
     <main>
-      <form>
+      <form id="form-category">
         <select name="select-category" id="select-category">
           <option value="">Select a category</option>
         </select>
@@ -31,12 +31,44 @@
       <div class="display-game" id="display-game">
         <h3 id="question"></h3>
         <!-- the options will be created with Javascript -->
-        <form class="options" id="options"></form>
-        <!-- This is going to be the timer -->
-        <div class="time-left">
-          <!-- <label for="time-left" id="timer"></label>
-          <progress id="progress-bar" value="5" max="20"></progress> -->
-        </div>
+        <form class="options" id="options">
+          <div class="option" id="wrapper1">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option1"
+            />
+            <label for="" id="label1"></label>
+          </div>
+          <div class="option" id="wrapper2">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option2"
+            />
+            <label for="" id="label2"></label>
+          </div>
+          <div class="option" id="wrapper3">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option3"
+            />
+            <label for="" id="label3"></label>
+          </div>
+          <div class="option" id="wrapper4">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option4"
+            />
+            <label for="" id="label4"></label>
+          </div>
+        </form>
         <!-- This button displays when the game ends -->
         <button type="button" id="play-again-button">Play Again</button>
       </div>
