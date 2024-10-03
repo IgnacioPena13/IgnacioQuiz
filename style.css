@@ -45,11 +45,27 @@ main {
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 15px;
 }
-
+#form-category {
+  background-color: var(--bg-game);
+  width: 30%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+}
+#select-category {
+  margin: 10px;
+  width: 80%;
+  display: flex;
+  align-self: center;
+  border: 2px solid var(--border-selection);
+}
 #button-start {
+  margin: 10px;
   width: 20%;
   height: 10%;
-  font-size: fit-content 20px;
+  font-size: 15px;
   font-family: "Press Start 2P";
   align-self: center;
   border: solid 2px var(--border);
@@ -58,6 +74,8 @@ main {
 }
 #button-start:hover {
   background-color: var(--contrast);
+  cursor: pointer;
+  transition: ease-in-out 0.1s;
 }
 #button-start:active {
   background-color: var(--border);
@@ -82,7 +100,7 @@ main {
 }
 .options {
   padding: 5px;
-  width: 50%;
+  width: 60%;
   font-size: 15px;
   margin: 8px;
   display: flex;
@@ -92,9 +110,10 @@ main {
 }
 
 .option {
-  margin: 10px;
+  margin: 5px;
+  padding: 5px;
   background-color: grey;
-  width: 90%;
+  max-width: 80%;
   height: fit-content;
   min-height: 20px;
   border-radius: 5px;
@@ -102,43 +121,57 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid var(--contrast);
 }
-
 .option:hover {
+  cursor: pointer;
+  transform: scale(1.1);
   background-color: var(--contrast);
-  transform: scale(1.2);
+  border: 2px solid var(--border-selection);
 }
-
-.time-left {
-  width: 35%;
-  height: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: "Press start 2P";
+.option input {
+  opacity: 0.5;
 }
-#progress-bar {
-  width: 90%;
-  height: 50%;
-  background-color: var(--progress);
+.option input:hover,
+.option label:hover {
+  cursor: pointer;
+}
+.option input:checked {
+  opacity: 1;
+}
+#button-proceed {
+  margin: 5px;
+  padding: 2px;
+  width: 30%;
+  height: 10%;
+  font-size: 15px;
+  font-family: "Roboto";
+  align-self: center;
   border: solid 2px var(--border);
   border-radius: 10px;
+  color: var(--font-color);
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
 }
-#progress-bar::-webkit-progress-value {
-  background-color: var(--bg-color2);
-  border-radius: 10px;
-}
-#progress-bar::-webkit-progress-bar {
-  border-radius: 10px;
+#button-proceed:hover {
+  background-color: var(--bg-game);
+  cursor: pointer;
+  transition: ease-in-out 0.1s;
 }
 
 #play-again-button {
-  width: 10%;
-  height: 5%;
+  display: none;
+  width: 40%;
+  height: 10%;
+  font-family: "Press Start 2P";
+  font-size: 20px;
   display: none;
   align-self: center;
-  border: solid 2px var(--border);
-  border-radius: 20px;
+  background-color: var(--bg-color);
+  border: solid 2px var(--border-selection);
+  transition: ease-in-out 0.1s;
+  border-radius: 10px;
   color: var(--font-color);
 }
 #play-again-button:active {
@@ -184,6 +217,7 @@ footer {
   }
   .options {
     font-size: 10px;
+    width: 90%;
   }
   footer {
     font-size: 5px;

@@ -1,17 +1,20 @@
 "use strict";
 window.addEventListener("load", () => {
+  //retrieves categories as soon as the window is loading
   retriveCategories();
 });
-
+//Assignment of HTML-elements
 const form = document.getElementById("form-category");
 const category = document.getElementById("select-category");
 const game = document.getElementById("display-game");
 const gameQuestion = document.getElementById("question");
 const options = document.getElementById("options");
-// const wrap1 = document.getElementById("wrapper1");
-// const wrap2 = document.getElementById("wrapper2");
-// const wrap3 = document.getElementById("wrapper3");
-// const wrap4 = document.getElementById("wrapper4");
+let btnProceed = document.querySelector("#button-proceed"); //not constant because it's values are going to be changed
+const playAgain = document.getElementById("play-again-button");
+let failsCount = document.getElementById("fails-counter");
+let correctCount = document.getElementById("question-counter");
+let pointsCount = document.getElementById("score-counter");
+//Option items
 const allWrappers = document.getElementsByClassName("option");
 const inputOption1 = document.getElementById("option1");
 const inputOption2 = document.getElementById("option2");
@@ -21,17 +24,19 @@ const inputlabel1 = document.getElementById("label1");
 const inputlabel2 = document.getElementById("label2");
 const inputlabel3 = document.getElementById("label3");
 const inputlabel4 = document.getElementById("label4");
-
+//arrays and global index to go to the next question
 let globalIndex = 0;
 let allQuestions = [];
 let userAnswers = [];
+let correctAnswers = [];
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   fetchData(category.value);
 });
 
 /*this function gets the categories from the API  
-and adds each one to the select element as an option*/
+and adds each one to the select element(category) as an option*/
 async function retriveCategories() {
   const response = await fetch(`https://opentdb.com/api_category.php`);
   const data = await response.json();
@@ -44,7 +49,7 @@ async function retriveCategories() {
       category.appendChild(option);
     });
 }
-
+/* fetch the data using the category that the user input */
 async function fetchData(category) {
   try {
     const response = await fetch(
@@ -62,25 +67,25 @@ async function displayGame(data) {
   game.style.display = "flex";
   form.style.display = "none";
   //create the questions array and mapping the answers to enlist them in an empty array
-  const itemsArray = data.results;
+  const itemsArray = await data.results;
   //getting a new object from data to use each key later.
   allQuestions = itemsArray.map((item) => ({
     question: item.question,
     answers: [item.correct_answer, ...item.incorrect_answers].sort(
       () => Math.random() - 0.5
-    ),
+    ), //answers are sorted inmediately so the correct answer is not always in the same place
     correctAnswer: item.correct_answer,
   }));
   console.log("allQuestions: ", allQuestions);
-
+  console.log("correctAnswers: ", correctAnswers);
+  //Starting the display of information
   displayQuestion();
   displayAnswers();
-  globalIndex++;
-  //detecting when an option is selected
-  //and making a continue button.
+  console.log("My answers", userAnswers);
+  console.log(globalIndex);
+  /*detecting when an option is selected and making a continue button.*/
   options.addEventListener("change", (e) => {
     e.preventDefault();
-    let btnProceed = document.querySelector("#button-proceed");
     if (!btnProceed) {
       btnProceed = document.createElement("button");
       btnProceed.type = "submit";
@@ -89,33 +94,44 @@ async function displayGame(data) {
       options.appendChild(btnProceed);
     }
   });
-  //jumping into the next question
+  /*adding an event listener to the options
+  to display a new button to continue to the next question*/
   options.addEventListener("submit", (e) => {
     e.preventDefault();
+    globalIndex++;
     let selectedOption = document.querySelector(
       'input[name="option-input"]:checked'
     );
     let userInput = selectedOption.value;
-    userAnswers.push(userInput);
-    globalIndex++;
+    userAnswers.push(userInput); //passing the answer to a new array for the final check
+    if (!globalIndex === 9) {
+      correctAnswers.push(allQuestions[globalIndex].correctAnswer);
+    }
+    console.log("correct: ", correctAnswers);
 
-    console.log("userAnswers: ", userAnswers);
-    gameQuestion.innerHTML = allQuestions[globalIndex].question;
+    if (globalIndex === 9) {
+      endGame();
+      return;
+    } else if (globalIndex >= 1) {
+      displayQuestion();
+      displayAnswers();
+      console.log("My answers", userAnswers);
+      console.log(globalIndex);
+    }
   });
 }
 
 function displayQuestion() {
   let questionArray = allQuestions[globalIndex];
-  console.log("QuestionArray: ", questionArray);
-  gameQuestion.innerHTML = questionArray.question;
+  gameQuestion.innerHTML = `Question ${globalIndex + 1}: ${
+    questionArray.question
+  }`;
 }
 
 function displayAnswers() {
   const questionsArray = allQuestions[globalIndex];
   const answers = questionsArray.answers;
-  console.log("answers", answers);
-
-  // answers.forEach((answer) => {
+  // assignment of an answer to each option.
   inputOption1.value = answers[0];
   inputlabel1.htmlFor = inputOption1.id;
   inputlabel1.innerHTML = inputOption1.value;
@@ -128,25 +144,37 @@ function displayAnswers() {
   inputOption4.value = answers[3];
   inputlabel4.htmlFor = inputOption4.id;
   inputlabel4.innerHTML = inputOption4.value;
-
-  // const wrapper = document.createElement("div");
-  // wrapper.classList.add("option");
-  // wrapper.id = `wrapper${i}`;
-  // const inputLabel = document.createElement("label");
-  // const inputOption = document.createElement("input");
-  // inputOption.style.width = "fit-content";
-  // inputOption.id = `option${i}`;
-  // inputOption.type = "radio";
-  // inputOption.classList.add("option");
-  // inputOption.value = answer;
-  // inputOption.name = "option-input";
-  // inputLabel.htmlFor = inputOption.id;
-  // inputLabel.innerHTML = answer;
-
-  //appending child elements to display them
-  // options.appendChild(wrapper);
-  // wrapper.appendChild(inputOption);
-  // wrapper.appendChild(inputLabel);
-
-  // });
+}
+function endGame() {
+  //checking the value of the global index, if it's 9 the game is ending
+  playAgain.style.display = "flex";
+  gameQuestion.style.display = "none";
+  options.style.display = "none";
+  options.removeChild(btnProceed);
+  getScore();
+}
+/**
+ * compares two arrays to count how many questions are correct
+ * and how many fails there are
+ * for every correct answer player gets 10p.
+ */
+function getScore() {
+  // userAnswers
+  // correctAnswers
+  let failsNumber = 0;
+  let correctNumber = 0;
+  let points = 0;
+  for (let i = 0; i < correctAnswers.length; i++) {
+    userAnswers.filter(() => {
+      if (!correctAnswers.includes(userAnswers[i])) {
+        failsNumber++;
+      } else {
+        correctNumber++;
+        points + 10;
+      }
+    });
+  }
+  pointsCount.innerHTML = "Score: " + points;
+  failsCount.innerHTML = "Fails: " + failsNumber;
+  correctCount.innerHTML = "Correct: " + correctNumber;
 }
