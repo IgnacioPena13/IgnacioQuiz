@@ -3,7 +3,88 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Press+Start+2P:regular"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic"
+      rel="stylesheet"
+    />
+    <title>Quiz!</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>Quiz!</h1>
+    </header>
+
+    <main>
+      <form id="form-category">
+        <select name="select-category" id="select-category">
+          <option value="">Select a category</option>
+        </select>
+        <!-- The button displays first and starts the game -->
+        <button type="submit" id="button-start">START</button>
+      </form>
+      <!-- when the button is clicked this div displays -->
+      <div class="display-game" id="display-game">
+        <h3 id="question"></h3>
+        <!-- the options will be created with Javascript -->
+        <form class="options" id="options">
+          <div class="option" id="wrapper1">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option1"
+            />
+            <label for="" id="label1"></label>
+          </div>
+          <div class="option" id="wrapper2">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option2"
+            />
+            <label for="" id="label2"></label>
+          </div>
+          <div class="option" id="wrapper3">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option3"
+            />
+            <label for="" id="label3"></label>
+          </div>
+          <div class="option" id="wrapper4">
+            <input
+              type="radio"
+              name="option-input"
+              class="option"
+              id="option4"
+            />
+            <label for="" id="label4"></label>
+          </div>
+        </form>
+        <!-- This button displays when the game ends -->
+        <input type="button" value="Play Again" id="play-again-button" />
+      </div>
+    </main>
+    <footer>
+      <!--Score: -->
+      <p class="score-counter" id="score-counter"></p>
+      <!-- New Highscore! -->
+      <p class="highscore" id="highscore"></p>
+      <!-- Last Game Score: -->
+      <p class="last-game" id="last-game"></p>
+      <!-- Fails: -->
+      <p class="fails-counter" id="fails-counter"></p>
+      <!-- Question: -->
+      <p class="question-counter" id="question-counter"></p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>
