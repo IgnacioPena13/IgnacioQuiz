@@ -63,6 +63,7 @@ main {
 }
 #button-start {
   margin: 10px;
+  min-width: fit-content;
   width: 20%;
   height: 10%;
   font-size: 15px;
@@ -84,6 +85,7 @@ main {
 }
 .display-game {
   width: 50%;
+  min-width: fit-content;
   height: 90%;
   border: solid 2px var(--border);
   border-radius: 10px;
@@ -162,8 +164,9 @@ main {
 
 #play-again-button {
   display: none;
-  width: 40%;
-  height: 10%;
+  width: 50%;
+  min-width: fit-content;
+  height: 15%;
   font-family: "Press Start 2P";
   font-size: 20px;
   display: none;
@@ -204,8 +207,13 @@ footer {
     width: 100%;
     font-size: 10px;
   }
+  #form-category {
+    width: 90%;
+    min-width: fit-content;
+  }
   #button-start {
-    width: 30%;
+    min-width: 30%;
+    width: fit-content;
     height: 10%;
     font-size: 15px;
   }
@@ -217,9 +225,10 @@ footer {
   }
   .options {
     font-size: 10px;
+    min-width: 50%;
     width: 90%;
   }
   footer {
-    font-size: 5px;
+    font-size: 10px;
   }
 }
